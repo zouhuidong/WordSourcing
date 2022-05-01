@@ -156,9 +156,9 @@ namespace EChecker_DiffWT {
 			if (affix[i].size() > 2 && (diff[0].size() > 1 || diff[1].size() > 1))
 			{
 				if (StringCoincidence(diff[0], affix[i], sc, begin[0], end[0], begin[1], end[1]) >
-					(diff[0].size() > affix[i].size() ? diff[0] : affix[i]).size() - 1 ||
+					(int)(diff[0].size() > affix[i].size() ? diff[0] : affix[i]).size() - 1 ||
 					StringCoincidence(diff[1], affix[i], sc, begin[0], end[0], begin[1], end[1]) >
-					(diff[1].size() > affix[i].size() ? diff[1] : affix[i]).size() - 1)
+					(int)(diff[1].size() > affix[i].size() ? diff[1] : affix[i]).size() - 1)
 				{
 					flag_affix = true;
 					break;

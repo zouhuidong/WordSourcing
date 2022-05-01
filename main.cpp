@@ -62,7 +62,6 @@ struct Sentence
 {
 	string sentence;
 	vector<string> words;
-	vector<string> prototype_words;
 };
 
 string strlwr(string s)
@@ -408,8 +407,6 @@ vector<Sentence> AnalyzeArticle(string strArticle)
 		{
 			if (sentence.sentence.size() > 1)
 			{
-				// temp
-				sentence.prototype_words = sentence.words;
 				vecSentences.push_back(sentence);
 				sentence = {};
 			}
@@ -430,9 +427,9 @@ void MatchSentence(vector<EWORD>& vecList, vector<Sentence> vecSentences)
 		}
 		for (int j = 0; j < (int)vecSentences.size(); j++)
 		{
-			for (int k = 0; k < (int)vecSentences[j].prototype_words.size(); k++)
+			for (int k = 0; k < (int)vecSentences[j].words.size(); k++)
 			{
-				if (strlwr(vecSentences[j].prototype_words[k]) == strlwr(vecList[i].name))
+				if (strlwr(vecSentences[j].words[k]) == strlwr(vecList[i].name))
 				{
 					ExampleSentence es = { vecSentences[j].sentence };
 					vecList[i].sentences.push_back(es);
@@ -452,13 +449,13 @@ void MatchSentence(vector<EWORD>& vecList, vector<Sentence> vecSentences)
 		{
 			for (int j = 0; j < (int)vecSentences.size(); j++)
 			{
-				for (int k = 0; k < (int)vecSentences[j].prototype_words.size(); k++)
+				for (int k = 0; k < (int)vecSentences[j].words.size(); k++)
 				{
-					if (EChecker_DiffWT::CheckWordsEquality(strlwr(vecSentences[j].prototype_words[k]), strlwr(vecList[i].name)))
+					if (EChecker_DiffWT::CheckWordsEquality(strlwr(vecSentences[j].words[k]), strlwr(vecList[i].name)))
 					{
 						ExampleSentence es = { vecSentences[j].sentence };
 						vecList[i].sentences.push_back(es);
-						printf("%s -> %s\n", vecList[i].name.c_str(), vecSentences[j].prototype_words[k].c_str());
+						printf("%s -> %s\n", vecList[i].name.c_str(), vecSentences[j].words[k].c_str());
 						j = (int)1e9;
 						break;
 					}
